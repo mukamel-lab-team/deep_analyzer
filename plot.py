@@ -41,15 +41,15 @@ def get_values(filename, start):
     if loss[-1] == "Validation" or acc[-1]  ==  "performance:":
         loss.pop()
         acc.pop()
-    print("============== Values ==============")
+    print("============== Values found ==============")
     print(loss)
     print(acc)
     return [loss, acc]
 
 
-def plot_acc(training, validation):
+def plot_acc(training, validation, no_epoch):
     
-    X = np.array(list(range(30)))  # epoch number
+    X = np.array(list(range(no_epoch)))  # epoch number
     Y1 = np.array(training)
     Y2 = np.array(validation)
 
@@ -57,8 +57,8 @@ def plot_acc(training, validation):
     plt.ylabel('Performance')
     plt.xlabel('Number of Epoch')
 
-    plt.xlim(0, 30)
-    plt.ylim(0, 4)
+    plt.xlim(0, no_epoch)
+    plt.ylim(0, 1.5)
 
     plt.grid(True)
 
@@ -69,9 +69,9 @@ def plot_acc(training, validation):
     plt.show()
 
 
-def plot_loss(training, validation):
+def plot_loss(training, validation, no_epoch):
     
-    X = np.array(list(range(30)))  # epoch number
+    X = np.array(list(range(no_epoch)))  # epoch number
     Y1 = np.array(training)
     Y2 = np.array(validation)
 
@@ -79,8 +79,8 @@ def plot_loss(training, validation):
     plt.ylabel('Performance')
     plt.xlabel('Number of Epoch')
 
-    plt.xlim(0, 30)
-    plt.ylim(0, 4)
+    plt.xlim(0, no_epoch)
+    plt.ylim(0, 1.5)
 
     plt.grid(True)
 
@@ -100,10 +100,14 @@ def startup(filename):
     validation_start = find_data(filename, validation)
 
     training_values = get_values(filename, training_start)
-    validation_values = get_values(filename, validation_start)
+    validation_values = get_values(filename, validation_start)    
 
-    plot_loss(training_values[0], validation_values[0])
-    plot_acc(training_values[1], training_values[1])    
+    no_epoch = len(training_values[0])
+    
+    print("\n Number of epoch found: "+str(no_epoch))
+
+    plot_loss(training_values[0], validation_values[0], no_epoch)
+    plot_acc(training_values[1], training_values[1], no_epoch)    
 
 
 if __name__ == "__main__":
