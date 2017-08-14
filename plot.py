@@ -1,5 +1,5 @@
 """
-Diego Zamora Rodríguez <dzamora@ucsd.edu>
+Diego Zamora Rodriguez <dzamora@ucsd.edu>
 
 Training log analyzer for the Deepcpg experiments
 
@@ -48,7 +48,8 @@ def get_values(filename, start):
 
 
 def plot_acc(training, validation, no_epoch):
-    
+    f = plt.figure()
+
     X = np.array(list(range(no_epoch)))  # epoch number
     Y1 = np.array(training)
     Y2 = np.array(validation)
@@ -57,8 +58,8 @@ def plot_acc(training, validation, no_epoch):
     plt.ylabel('Performance')
     plt.xlabel('Number of Epoch')
 
-    plt.xlim(0, no_epoch)
-    plt.ylim(0, 1.5)
+    # plt.xlim(0, no_epoch)
+    # plt.ylim(0, 1.5)
 
     plt.grid(True)
 
@@ -68,8 +69,11 @@ def plot_acc(training, validation, no_epoch):
     plt.legend()
     plt.show()
 
+    f.savefig("plot_acc.pdf")
+
 
 def plot_loss(training, validation, no_epoch):
+    f = plt.figure()
     
     X = np.array(list(range(no_epoch)))  # epoch number
     Y1 = np.array(training)
@@ -79,8 +83,8 @@ def plot_loss(training, validation, no_epoch):
     plt.ylabel('Performance')
     plt.xlabel('Number of Epoch')
 
-    plt.xlim(0, no_epoch)
-    plt.ylim(0, 1.5)
+    # plt.xlim(0, no_epoch)
+    # plt.ylim(0, 1.5)
 
     plt.grid(True)
 
@@ -89,6 +93,8 @@ def plot_loss(training, validation, no_epoch):
 
     plt.legend()
     plt.show()
+
+    f.savefig("plot_loss.pdf")
 
 
 
@@ -107,8 +113,15 @@ def startup(filename):
     print("\n Number of epoch found: "+str(no_epoch))
 
     plot_loss(training_values[0], validation_values[0], no_epoch)
-    plot_acc(training_values[1], training_values[1], no_epoch)    
+    plot_acc(training_values[1], validation_values[1], no_epoch)    
+
+# def save_pdf():
+#     f = plt.figure()
+#     plt.plot(range(10), range(10), "o")
+#     plt.show()
+
+#     f.savefig("", bbox_inches='tight')
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":    
     startup(sys.argv[1])

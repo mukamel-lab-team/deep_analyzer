@@ -33,6 +33,10 @@ for example
 
 ``` python plot.py train.log ```
 
+- Output
+
+when you run the code it automatically saves it to pdf files in the current folder
+
 # Notes
 
 We strongly recommend you to install these dependencies using Anaconda or Miniconda for example ``` conda install numpy ```
